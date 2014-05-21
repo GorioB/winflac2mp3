@@ -28,6 +28,7 @@ def flac2mp3(flacfn,mp3fn,verbose):
 	if verbose:
 		print "[+] Encoded as "+mp3fn+"."
 	os.remove('temp.wav')
+	return 0
 
 if __name__=='__main__':
 	parser = argparse.ArgumentParser()
