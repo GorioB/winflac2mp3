@@ -12,7 +12,7 @@ Save the FLAC and LAME .exes in some easily accessible folder and set the lame_p
 Install requirements.txt using pip (pip install -r requirements.txt)
 
 Command line:  
-  python flac2mp3.py inputfn ouputfn [-v]
+  python flac2mp3.py inputfn ouputfn [-v] [--flac-binary FLAC_BINARY] [--lame-binary LAME_BINARY]
 
 Script:  
   from flac2mp3 import flac2mp3  
