@@ -8,6 +8,15 @@ lamepath = reduce(os.path.join,lame_path)
 flacpath = reduce(os.path.join,flac_path)
 
 def flac2mp3(flacfn,mp3fn,verbose):
+	if not os.path.exists(lamepath):
+		if(verbose):
+			print "[-] Cannot find lame encoder."
+		return 1
+	if not os.path.exists(flacpath):
+		if verbose:
+			print "[-] Cannot find flac decoder."
+		return 1
+
 	flacData = mutagen.flac.FLAC(flacfn)
 	if verbose:
 		print "[*] FLAC METADATA:"
@@ -35,5 +44,19 @@ if __name__=='__main__':
 	parser.add_argument("flacfn",help="FLAC filename (with extension)")
 	parser.add_argument("mp3fn",help="Output filename (with extension)")
 	parser.add_argument("-v","--verbose",help="Increase output verbosity",action="store_true")
+	parser.add_argument("--flac-binary",help="Specify FLAC binary")
+	parser.add_argument("--lame-binary",help="Specify LAME binary")
 	args = parser.parse_args()
+	if args.flac_binary:
+		if os.path.exists(args.flac_binary):
+			flacpath=args.flac_binary
+		else:
+			print "[-] Cannot find flac decoder."
+
+	if args.lame_binary:
+		if os.path.exists(args.lame_binary):
+			lamepath=args.lame_binary
+		else:
+			print "[-] Cannot find lame encoder."
+
 	flac2mp3(args.flacfn,args.mp3fn,args.verbose)
